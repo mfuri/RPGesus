@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="RPGesus"
+                android:text="@string/app_name"
                 android:textAlignment="center"
                 android:textColor="#2758B8"
                 android:textSize="34sp" />
@@ -79,12 +79,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="New" />
+                android:backgroundTint="@color/rpg_blue"
+                android:text="New"
+                android:textColor="#FFE1E2E4" />
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 </FrameLayout>
