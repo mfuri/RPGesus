@@ -185,7 +185,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="35dp"
-            android:text="<"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/strengthPointsEditText"
             app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
 
@@ -195,7 +195,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="<"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/intelligencePointsEditText"
             app:layout_constraintTop_toBottomOf="@+id/strengthMinusButton" />
 
@@ -205,7 +205,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="<"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/charismaPointsEditText"
             app:layout_constraintTop_toBottomOf="@+id/intelMinusButton" />
 
@@ -215,7 +215,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="<"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/vitalityPointsEditText"
             app:layout_constraintTop_toBottomOf="@+id/charismaMinusButton" />
 
@@ -225,7 +225,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="<"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/luckPointsEditText"
             app:layout_constraintTop_toBottomOf="@+id/vitalityMinusButton" />
 
@@ -235,7 +235,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="35dp"
-            android:text=">"
+            android:text="+"
             app:layout_constraintStart_toEndOf="@+id/strengthMinusButton"
             app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
 
@@ -245,7 +245,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
-            android:text=">"
+            android:text="+"
             app:layout_constraintStart_toEndOf="@+id/intelMinusButton"
             app:layout_constraintTop_toBottomOf="@+id/strengthPlusButton" />
 
@@ -255,7 +255,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
-            android:text=">"
+            android:text="+"
             app:layout_constraintStart_toEndOf="@+id/charismaMinusButton"
             app:layout_constraintTop_toBottomOf="@+id/intelPlusButton" />
 
@@ -265,7 +265,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
-            android:text=">"
+            android:text="+"
             app:layout_constraintStart_toEndOf="@+id/vitalityMinusButton"
             app:layout_constraintTop_toBottomOf="@+id/charismaPlusButton" />
 
@@ -275,7 +275,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
-            android:text=">"
+            android:text="+"
             app:layout_constraintStart_toEndOf="@+id/luckMinusButton"
             app:layout_constraintTop_toBottomOf="@+id/vitalityPlusButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
