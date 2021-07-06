@@ -1,6 +1,7 @@
 package com.cop4656.rpgesus;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +42,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     private Button luckMinus;
     private Button goBackButton;
     private Button continueButton;
+    private ImageView avatarView;
+    private Button avatarButton;
 
 
     private EditText strength;
@@ -48,6 +54,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
 
     private EditText Name;
     private Spinner Race;
+
+    public static final int IMAGE_CODE = 1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -109,6 +117,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         luckMinus = (Button) view.findViewById(R.id.luckMinusButton);
         goBackButton = (Button) view.findViewById(R.id.goBackButton);
         continueButton = (Button) view.findViewById(R.id.continueButton);
+        avatarView = (ImageView) view.findViewById(R.id.characterAvatarView);
+        avatarButton = (Button) view.findViewById(R.id.avatarUploadButton);
 
         //Adding onClickListenrs to current Buttons
 
@@ -124,6 +134,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         luckMinus.setOnClickListener(this);
         continueButton.setOnClickListener(this);
         goBackButton.setOnClickListener(this);
+        avatarButton.setOnClickListener(this);
 
         //Getting TextViews to display current skill point values
 
@@ -214,6 +225,19 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
             fragmentTransaction.replace(R.id.list_fragment, welcomeFrag);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit(); //going to the character_creation fragment
+        }
+        if(v.getId() == R.id.avatarUploadButton){
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, IMAGE_CODE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
+            avatarView.setImageURI(data.getData());
         }
     }
 
