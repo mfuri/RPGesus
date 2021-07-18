@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.cop4656.rpgesus.Character;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class CharacterViewModel extends ViewModel {
     private MutableLiveData<LinkedList<Character>> characters;
