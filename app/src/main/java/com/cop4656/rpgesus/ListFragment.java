@@ -68,20 +68,10 @@ public class ListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel =  new ViewModelProvider(requireActivity()).get(com.cop4656.rpgesus.CharacterViewModel.class);
 
-        /*ListAdapter customAdapter = new ListAdapter(getActivity(), R.layout.fragment_character_list_row, mViewModel.getCharacters().getValue());
-        listView.setAdapter(customAdapter);
-
-        mViewModel.getCharacters().observe(getViewLifecycleOwner(), characters -> {
-            ListAdapter customAdapter = new ListAdapter(getActivity(), R.layout.fragment_character_list_row, characters);
-            listView.setAdapter(customAdapter);
-        });*/
-
-
        mViewModel.getCharacters().observe(getViewLifecycleOwner(), new Observer<LinkedList<Character>>() {
             @Override
             public void onChanged(LinkedList<Character> characters) {
                 ListAdapter customAdapter = new ListAdapter(getActivity(), R.layout.fragment_character_list_row, mViewModel.getCharacters().getValue());
-                //ArrayAdapter<String> adapter =  new ArrayAdapter(getActivity(), android.R.layout.fragment_character_list_row, mViewModel.getCharacters().getValue());
                 listView.setAdapter(customAdapter);
             }
         });

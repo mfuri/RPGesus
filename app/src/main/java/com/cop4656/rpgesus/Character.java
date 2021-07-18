@@ -85,9 +85,4 @@ public class Character {
         this.charisma = charisma;
     }
 
-    @Override
-    public String toString() {
-        return String.format(this.name + " " + this.race);
-    }
-
 }

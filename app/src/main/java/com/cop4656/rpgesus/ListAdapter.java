@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+import java.lang.*;
 
 public class ListAdapter extends ArrayAdapter<Character> {
 
@@ -47,7 +48,7 @@ public class ListAdapter extends ArrayAdapter<Character> {
             }
 
             if (tt3 != null) {
-                tt3.setText("p.getLevel()");
+                tt3.setText(p.getLevel() + "");
             }
         }
 
