@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lowagie.text.pdf.*;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
