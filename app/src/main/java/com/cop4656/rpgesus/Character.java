@@ -84,4 +84,10 @@ public class Character {
     public void setCharisma(int charisma) {
         this.charisma = charisma;
     }
+
+    @Override
+    public String toString() {
+        return String.format(this.name + " " + this.race);
+    }
+
 }

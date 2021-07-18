@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.List;
+
 public class welcomeFragment extends Fragment {
 
     public welcomeFragment() {
@@ -29,7 +31,7 @@ public class welcomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
         Button newButton = (Button) view.findViewById(R.id.newButton); //this button will send the user to the creation screen for a character
-
+        Button editButton = (Button) view.findViewById(R.id.editButton);
         newButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -37,6 +39,18 @@ public class welcomeFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.list_fragment, creationFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit(); //going to the character_creation fragment
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Fragment listFragment = new ListFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.list_fragment, listFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit(); //going to the character_creation fragment
             }

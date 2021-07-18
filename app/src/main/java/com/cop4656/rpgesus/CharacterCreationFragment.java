@@ -7,10 +7,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
@@ -21,6 +24,8 @@ import android.widget.Toast;
 
 import com.lowagie.text.pdf.*;
 
+import java.util.LinkedList;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -29,6 +34,8 @@ import static android.app.Activity.RESULT_OK;
  * create an instance of this fragment.
  */
 public class CharacterCreationFragment extends Fragment implements View.OnClickListener{
+    private com.cop4656.rpgesus.CharacterViewModel mViewModel;
+
     private int currentUnallocatedPoints;
     private TextView points;
 
@@ -104,6 +111,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_character_creation, container, false);
+
+        mViewModel =  new ViewModelProvider(requireActivity()).get(com.cop4656.rpgesus.CharacterViewModel.class);
 
         //Getting all buttons
 
@@ -201,6 +210,20 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         }
         if(v.getId() == R.id.continueButton){ //saving character to database
             if(currentUnallocatedPoints == 0){
+
+                Character character = new Character();
+                character.setName(Name.getText().toString().trim());
+                character.setRace(Race.getSelectedItem().toString().trim());
+                character.setPictureURI("");
+                character.setLevel(10);
+                character.setCharisma(10);
+                character.setVitality(1);
+                character.setStrength(1);
+                character.setLuck(1);
+                character.setIntelligence(1);
+                mViewModel.addCharacter(character);
+
+
                 Toast.makeText(getContext(), "The following information was saved to the database",Toast.LENGTH_LONG).show();
 
                 ContentValues contentValues = new ContentValues();
