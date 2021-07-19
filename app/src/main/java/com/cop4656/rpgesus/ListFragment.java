@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,6 +40,12 @@ public class ListFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Character currentCharacter = (Character) parent.getItemAtPosition(position);
             mViewModel.setCurrentCharacter(currentCharacter);
+            Fragment editFragment = new CharacterEditFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.list_fragment, editFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit(); //going to the character_creation fragment
         }
     };
 

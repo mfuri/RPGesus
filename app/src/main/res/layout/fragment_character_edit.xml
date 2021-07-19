@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterCreationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/characterAvatarView"
+                    android:layout_width="128dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="267dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/avatarUploadButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <EditText
+                    android:id="@+id/characterNameEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="39dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/characterAvatarView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/pointsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginTop="119dp"
+                    android:layout_marginEnd="157dp"
+                    android:gravity="center"
+                    android:text="Total Skill Points:"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
+
+                <TextView
+                    android:id="@+id/remainingSkillPointsView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="101dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="101dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.487"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pointsLabel" />
+
+                <TextView
+                    android:id="@+id/strengthLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Strength"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
+
+                <TextView
+                    android:id="@+id/intelligenceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Intelligence"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/strengthLabel" />
+
+                <TextView
+                    android:id="@+id/charismaLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Charisma"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/intelligenceLabel" />
+
+                <TextView
+                    android:id="@+id/vitalityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Vitality"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charismaLabel" />
+
+                <TextView
+                    android:id="@+id/luckLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Luck"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vitalityLabel" />
+
+                <EditText
+                    android:id="@+id/strengthPointsEditText"
+                    android:layout_width="80dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="223dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
+
+                <EditText
+                    android:id="@+id/intelligencePointsEditText"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="223dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/strengthPointsEditText" />
+
+                <EditText
+                    android:id="@+id/charismaPointsEditText"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="223dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/intelligencePointsEditText" />
+
+                <EditText
+                    android:id="@+id/vitalityPointsEditText"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="223dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charismaPointsEditText" />
+
+                <EditText
+                    android:id="@+id/luckPointsEditText"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="223dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vitalityPointsEditText" />
+
+                <Spinner
+                    android:id="@+id/raceSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="64dp"
+                    android:entries="@array/races"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
+
+                <Button
+                    android:id="@+id/strengthMinusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="35dp"
+                    android:backgroundTint="@color/rpg_red"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/strengthPointsEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
+
+                <Button
+                    android:id="@+id/intelMinusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_lightblue"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/intelligencePointsEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/strengthMinusButton" />
+
+                <Button
+                    android:id="@+id/charismaMinusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_orange"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/charismaPointsEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/intelMinusButton" />
+
+                <Button
+                    android:id="@+id/vitalityMinusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_maroon"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/vitalityPointsEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/charismaMinusButton" />
+
+                <Button
+                    android:id="@+id/luckMinusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_green"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/luckPointsEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/vitalityMinusButton" />
+
+                <Button
+                    android:id="@+id/strengthPlusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="35dp"
+                    android:backgroundTint="@color/rpg_red"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/strengthMinusButton"
+                    app:layout_constraintTop_toBottomOf="@+id/remainingSkillPointsView" />
+
+                <Button
+                    android:id="@+id/intelPlusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_lightblue"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/intelMinusButton"
+                    app:layout_constraintTop_toBottomOf="@+id/strengthPlusButton" />
+
+                <Button
+                    android:id="@+id/charismaPlusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_orange"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/charismaMinusButton"
+                    app:layout_constraintTop_toBottomOf="@+id/intelPlusButton" />
+
+                <Button
+                    android:id="@+id/vitalityPlusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_maroon"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/vitalityMinusButton"
+                    app:layout_constraintTop_toBottomOf="@+id/charismaPlusButton" />
+
+                <Button
+                    android:id="@+id/luckPlusButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/rpg_green"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/luckMinusButton"
+                    app:layout_constraintTop_toBottomOf="@+id/vitalityPlusButton" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Set Race:"
+                    app:layout_constraintEnd_toStartOf="@+id/raceSpinner"
+                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
+
+                <Button
+                    android:id="@+id/continueButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="68dp"
+                    android:text="Continue"
+                    android:backgroundTint="@color/rpg_blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/luckMinusButton" />
+
+                <Button
+                    android:id="@+id/goBackButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Go Back"
+                    android:backgroundTint="@color/rpg_blue"
+                    app:layout_constraintEnd_toStartOf="@+id/continueButton"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/luckPointsEditText" />
+
+                <Button
+                    android:id="@+id/avatarUploadButton"
+                    android:layout_width="105dp"
+                    android:layout_height="59dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="21dp"
+                    android:backgroundTint="@color/rpg_blue"
+                    android:text="Upload Avatar"
+                    app:layout_constraintBottom_toTopOf="@+id/remainingSkillPointsView"
+                    app:layout_constraintEnd_toStartOf="@+id/pointsLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/characterAvatarView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -91,7 +91,7 @@ public class CharacterContentProvider extends ContentProvider {
         String charisma = values.getAsString(COLUMN_CHARISMA).trim();
         String vitality = values.getAsString(COLUMN_VITALITY).trim();
         String luck = values.getAsString(COLUMN_LUCK).trim();
-        //String level = values.getAsString(COLUMN_LEVEL).trim();
+        String level = values.getAsString(COLUMN_LEVEL).trim();
 
         if(name.equals("")){ return null;}
         if(race.equals("")){ return null;}
@@ -101,7 +101,7 @@ public class CharacterContentProvider extends ContentProvider {
         if(charisma.equals("")){ return null;}
         if(vitality.equals("")){ return null;}
         if(luck.equals("")){ return null;}
-        //if (level.equals("")) { return null;}
+        if (level.equals("")) { return null;}
 
 
         long id = mOpenHelper.getWritableDatabase().insert(TABLE_NAMESTABLE, null, values);

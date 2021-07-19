@@ -40,13 +40,13 @@ import static android.app.Activity.RESULT_OK;
  * Use the {@link CharacterCreationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CharacterCreationFragment extends Fragment implements View.OnClickListener{
+public class CharacterEditFragment extends Fragment implements View.OnClickListener{
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
 
     private String avatarURI;
-    private int currentUnallocatedPoints;
-    private int level = 10;
+    private int currentUnallocatedPoints = 0;
     private TextView points;
+    private int level;
 
     private Button strengthPlus;
     private Button strengthMinus;
@@ -85,7 +85,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     private String mParam1;
     private String mParam2;
 
-    public CharacterCreationFragment() {
+    public CharacterEditFragment() {
         // Required empty public constructor
     }
 
@@ -98,8 +98,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
      * @return A new instance of fragment CharacterCreationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CharacterCreationFragment newInstance(String param1, String param2) {
-        CharacterCreationFragment fragment = new CharacterCreationFragment();
+    public static CharacterEditFragment newInstance(String param1, String param2) {
+        CharacterEditFragment fragment = new CharacterEditFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -120,10 +120,10 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_character_creation, container, false);
+        View view = inflater.inflate(R.layout.fragment_character_edit, container, false);
 
         mViewModel =  new ViewModelProvider(requireActivity()).get(com.cop4656.rpgesus.CharacterViewModel.class);
-
+        level = mViewModel.getCurrentCharacter().getValue().getLevel();
         //Getting all buttons
 
         strengthPlus = (Button) view.findViewById(R.id.strengthPlusButton);
@@ -164,6 +164,14 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         charisma = (EditText) view.findViewById(R.id.charismaPointsEditText);
         vitality = (EditText) view.findViewById(R.id.vitalityPointsEditText);
         luck = (EditText) view.findViewById(R.id.luckPointsEditText);
+
+        strength.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getStrength())));
+        intel.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getIntelligence())));
+        charisma.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getCharisma())));
+        vitality.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getVitality())));
+        luck.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getLuck())));
+
+
 
         //Getting points that are unallocated to the user
 
@@ -214,9 +222,24 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         Name = (EditText) view.findViewById(R.id.characterNameEditText);
         Race = (Spinner) view.findViewById(R.id.raceSpinner) ;
 
+        Name.setText(mViewModel.getCurrentCharacter().getValue().getName());
+        Race.setSelection(getIndex(Race, mViewModel.getCurrentCharacter().getValue().getRace()));
+
+
         return view;
     }
 
+
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
 
     @Override
     public void onClick(View v) { //Custom onClick method
@@ -262,22 +285,42 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
             if(currentUnallocatedPoints == 0){
 
                 Character character = new Character();
-                character.setName(Name.getText().toString().trim());
+
+                mViewModel.getCurrentCharacter().getValue().setName(Name.getText().toString().trim());
+                mViewModel.getCurrentCharacter().getValue().setRace(Race.getSelectedItem().toString().trim());
+
+                if (avatarURI != null) {
+                    mViewModel.getCurrentCharacter().getValue().setAvatarURI(avatarURI);
+                    avatarURI = null;
+                }
+
+                mViewModel.getCurrentCharacter().getValue().setLevel(level);
+                mViewModel.getCurrentCharacter().getValue().setCharisma(Integer.parseInt(charisma.getText().toString()));
+                mViewModel.getCurrentCharacter().getValue().setVitality(Integer.parseInt(vitality.getText().toString()));
+                mViewModel.getCurrentCharacter().getValue().setStrength(Integer.parseInt(strength.getText().toString()));
+                mViewModel.getCurrentCharacter().getValue().setLuck(Integer.parseInt(luck.getText().toString()));
+                mViewModel.getCurrentCharacter().getValue().setIntelligence(Integer.parseInt(intel.getText().toString()));
+                mViewModel.setCurrentCharacter(mViewModel.getCurrentCharacter().getValue());
+
+                /*character.setName(Name.getText().toString().trim());
                 character.setRace(Race.getSelectedItem().toString().trim());
+
                 if (avatarURI != null) {
                     character.setAvatarURI(avatarURI);
                     avatarURI = null;
                 }
+
                 character.setLevel(level);
                 character.setCharisma(Integer.parseInt(charisma.getText().toString()));
                 character.setVitality(Integer.parseInt(vitality.getText().toString()));
                 character.setStrength(Integer.parseInt(strength.getText().toString()));
                 character.setLuck(Integer.parseInt(luck.getText().toString()));
                 character.setIntelligence(Integer.parseInt(intel.getText().toString()));
-                mViewModel.addCharacter(character);
+                mViewModel.setCurrentCharacter(character);*/
+                //mViewModel.addCharacter(character);
 
 
-                Toast.makeText(getContext(), "The following information was saved to the database",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "The following information was edited",Toast.LENGTH_LONG).show();
 
                 ContentValues contentValues = new ContentValues();
 
@@ -304,7 +347,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.list_fragment, welcomeFrag);
             fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit(); //going to the character_creation fragment
+            fragmentTransaction.commit(); //going to the character_Edit fragment
         }
         if(v.getId() == R.id.avatarUploadButton){
             Intent intent = new Intent(Intent.ACTION_PICK);
