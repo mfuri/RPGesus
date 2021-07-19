@@ -48,7 +48,7 @@ public class ListAdapter extends ArrayAdapter<Character> {
             }
 
             if (tt3 != null) {
-                tt3.setText(p.getLevel() + "");
+                tt3.setText(String.valueOf(p.getLevel()));
             }
         }
 

@@ -1,6 +1,8 @@
 package com.cop4656.rpgesus;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +39,9 @@ import static android.app.Activity.RESULT_OK;
 public class CharacterCreationFragment extends Fragment implements View.OnClickListener{
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
 
+    private String avatarURI;
     private int currentUnallocatedPoints;
+    private int level = 10;
     private TextView points;
 
     private Button strengthPlus;
@@ -60,6 +65,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     private EditText charisma;
     private EditText vitality;
     private EditText luck;
+    //private EditText level;
 
     private EditText Name;
     private Spinner Race;
@@ -158,6 +164,41 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         //Getting points that are unallocated to the user
 
         points = (TextView) view.findViewById(R.id.remainingSkillPointsView);
+        points.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Set Character Level");
+
+                // Set up the input
+                final EditText input = new EditText(getContext());
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setView(input);
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (Integer.parseInt(input.getText().toString()) < 1 || Integer.parseInt(input.getText().toString()) > 70)
+                            Toast.makeText(getContext(), "Invalid level",Toast.LENGTH_LONG).show();
+                        else {
+                            level = Integer.parseInt(input.getText().toString());
+                            points.setText(String.valueOf(level));
+                            currentUnallocatedPoints = level;
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
         currentUnallocatedPoints = Integer.parseInt(points.getText().toString());
 
         //Getting name and race selection
@@ -214,13 +255,16 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 Character character = new Character();
                 character.setName(Name.getText().toString().trim());
                 character.setRace(Race.getSelectedItem().toString().trim());
-                character.setPictureURI("");
-                character.setLevel(10);
-                character.setCharisma(10);
-                character.setVitality(1);
-                character.setStrength(1);
-                character.setLuck(1);
-                character.setIntelligence(1);
+                if (avatarURI != null) {
+                    character.setAvatarURI(avatarURI);
+                    avatarURI = null;
+                }
+                character.setLevel(level);
+                character.setCharisma(Integer.parseInt(charisma.getText().toString()));
+                character.setVitality(Integer.parseInt(vitality.getText().toString()));
+                character.setStrength(Integer.parseInt(strength.getText().toString()));
+                character.setLuck(Integer.parseInt(luck.getText().toString()));
+                character.setIntelligence(Integer.parseInt(intel.getText().toString()));
                 mViewModel.addCharacter(character);
 
 
@@ -235,6 +279,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 contentValues.put(CharacterContentProvider.COLUMN_CHARISMA, charisma.getText().toString().trim());
                 contentValues.put(CharacterContentProvider.COLUMN_VITALITY, vitality.getText().toString().trim());
                 contentValues.put(CharacterContentProvider.COLUMN_LUCK, luck.getText().toString().trim());
+                //contentValues.put(CharacterContentProvider.COLUMN_LEVEL, String.valueOf(level));
+                //contentValues.put(CharacterContentProvider.COLUMN_AVATAR, avatarURI);
 
                 getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
             }
@@ -263,6 +309,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
             avatarView.setImageURI(data.getData());
+            avatarURI = data.getData().toString();
         }
     }
 

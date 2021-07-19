@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Character {
     private String name;
-    private String pictureURI;
+    private String avatarURI;
     private int level;
     private String race;
     private int strength;
@@ -17,8 +17,8 @@ public class Character {
         return name;
     }
 
-    public String getPictureURI(){
-        return pictureURI;
+    public String getAvatarURI(){
+        return avatarURI;
     }
 
     public int getLevel() {
@@ -57,8 +57,8 @@ public class Character {
         this.level = level;
     }
 
-    public void setPictureURI(String pictureURI) {
-        this.pictureURI = pictureURI;
+    public void setAvatarURI(String pictureURI) {
+        this.avatarURI = avatarURI;
     }
 
     public void setRace(String race) {

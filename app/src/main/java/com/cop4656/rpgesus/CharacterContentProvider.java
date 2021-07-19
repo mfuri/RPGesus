@@ -26,12 +26,14 @@ public class CharacterContentProvider extends ContentProvider {
 
     public final static String TABLE_NAMESTABLE = "Characters";
     public final static String COLUMN_NAME = "Name";
+    public final static String COLUMN_LEVEL = "Level";
     public final static String COLUMN_RACE = "Race";
     public final static String COLUMN_STRENGTH= "Strength";
     public final static String COLUMN_INTELLIGENCE = "Intelligence";
     public final static String COLUMN_CHARISMA = "Charisma";
     public final static String COLUMN_VITALITY = "Vitality";
     public final static String COLUMN_LUCK = "Luck";
+    public final static String COLUMN_AVATAR = "Avatar";
 
 
     public static final String AUTHORITY = "com.cop4656.rpgesus";
@@ -56,6 +58,10 @@ public class CharacterContentProvider extends ContentProvider {
             " TEXT,"+
             COLUMN_VITALITY +
             " TEXT,"+
+            COLUMN_LEVEL +
+            " TEXT,"+
+            COLUMN_AVATAR +
+            " TEXT,"+
             COLUMN_LUCK +
             " TEXT)";
 
@@ -75,21 +81,27 @@ public class CharacterContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+
+
         String name = values.getAsString(COLUMN_NAME).trim();
         String race = values.getAsString(COLUMN_RACE).trim();
+        //String avatar = null; //values.getAsString(COLUMN_AVATAR).trim();
         String strength = values.getAsString(COLUMN_STRENGTH).trim();
         String intel = values.getAsString(COLUMN_INTELLIGENCE).trim();
         String charisma = values.getAsString(COLUMN_CHARISMA).trim();
         String vitality = values.getAsString(COLUMN_VITALITY).trim();
         String luck = values.getAsString(COLUMN_LUCK).trim();
+        //String level = values.getAsString(COLUMN_LEVEL).trim();
 
         if(name.equals("")){ return null;}
         if(race.equals("")){ return null;}
+        //if(avatar.equals("")){ return null; }
         if(strength.equals("")){ return null;}
         if(intel.equals("")){ return null;}
         if(charisma.equals("")){ return null;}
         if(vitality.equals("")){ return null;}
         if(luck.equals("")){ return null;}
+        //if (level.equals("")) { return null;}
 
 
         long id = mOpenHelper.getWritableDatabase().insert(TABLE_NAMESTABLE, null, values);
