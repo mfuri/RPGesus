@@ -22,7 +22,7 @@
                 <ImageView
                     android:id="@+id/characterAvatarView"
                     android:layout_width="128dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="128dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="267dp"
