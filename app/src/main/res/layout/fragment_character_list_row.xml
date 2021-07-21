@@ -1,42 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content" android:orientation="vertical"
-    android:layout_width="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <TableRow android:layout_width="fill_parent"
+    <TableRow
         android:id="@+id/TableRow01"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <TextView android:textColor="#000000"
-            android:id="@+id/id"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="id" android:textStyle="bold"
-            android:gravity="left"
-            android:layout_weight="1"
-            android:typeface="monospace"
-            android:height="40sp" />
-    </TableRow>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="117dp"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TableRow android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView android:textColor="#000000"
-            android:id="@+id/categoryId"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="categoryId"
-            android:layout_weight="1"
-            android:height="20sp" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:textColor="#000000"
-            android:gravity="right"
-            android:id="@+id/description"
-            android:text="description"
-            android:height="20sp" />
+                <TextView
+                    android:id="@+id/charName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:width="40sp"
+                    android:height="40sp"
+                    android:gravity="left"
+                    android:padding="10sp"
+                    android:text="Name"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/charRace"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:height="40sp"
+                    android:gravity="left"
+                    android:padding="10sp"
+                    android:text="Race"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/charLevel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:height="40sp"
+                    android:padding="10sp"
+                    android:text="Level"
+                    android:textColor="#000000" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/charSkills"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:height="40sp"
+                    android:gravity="left"
+                    android:padding="10sp"
+                    android:text="Skills"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+            </TableRow>
+
+        </TableLayout>
+
     </TableRow>
 
 </TableLayout>

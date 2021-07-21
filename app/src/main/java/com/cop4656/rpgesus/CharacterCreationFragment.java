@@ -272,7 +272,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                     character.setAvatarURI(avatarURI);
                     avatarURI = null;
                 }*/
-                character.setAvatarURI(avatarView.getTag().toString());
+                //character.setAvatarURI(avatarView.getTag().toString());
                 character.setLevel(level);
                 character.setCharisma(Integer.parseInt(charisma.getText().toString()));
                 character.setVitality(Integer.parseInt(vitality.getText().toString()));
@@ -326,7 +326,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
             avatarView.setImageURI(data.getData());
-            avatarView.setTag(data.getData().toString());
+            //avatarView.setTag(data.getData().toString());
         }
     }
 

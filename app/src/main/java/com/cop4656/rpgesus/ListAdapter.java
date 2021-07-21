@@ -35,20 +35,22 @@ public class ListAdapter extends ArrayAdapter<Character> {
         Character p = getItem(position);
 
         if (p != null) {
-            TextView tt1 = (TextView) v.findViewById(R.id.id);
-            TextView tt2 = (TextView) v.findViewById(R.id.categoryId);
-            TextView tt3 = (TextView) v.findViewById(R.id.description);
+            TextView charName = (TextView) v.findViewById(R.id.charName);
+            TextView charLevel = (TextView) v.findViewById(R.id.charLevel);
+            TextView charRace = (TextView) v.findViewById(R.id.charRace);
+            TextView charSkills = (TextView) v.findViewById(R.id.charSkills);
 
-            if (tt1 != null) {
-                tt1.setText(p.getName());
+            if (charName != null) {
+                charName.setText(p.getName().trim());
             }
-
-            if (tt2 != null) {
-                tt2.setText(p.getRace());
+            if (charRace != null) {
+                charRace.setText(p.getRace().trim());
             }
-
-            if (tt3 != null) {
-                tt3.setText(String.valueOf(p.getLevel()));
+            if (charLevel != null) {
+                charLevel.setText(String.valueOf(p.getLevel()).trim());
+            }
+            if (charSkills != null){
+                charSkills.setText("S:" + p.getStrength() + " C:" + p.getCharisma() + " I:" + p.getIntelligence() + " L:" + p.getLuck() + " V:" + p.getVitality());
             }
         }
 
