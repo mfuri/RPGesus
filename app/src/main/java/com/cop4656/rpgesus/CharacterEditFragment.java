@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,7 +18,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lowagie.text.pdf.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -55,6 +62,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
     private int currentUnallocatedPoints = 0;
     private TextView points;
     private int level;
+    private Bitmap bitmap;
 
     private Button strengthPlus;
     private Button strengthMinus;
@@ -233,7 +241,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         Name.setText(mViewModel.getCurrentCharacter().getValue().getName());
         Race.setSelection(getIndex(Race, mViewModel.getCurrentCharacter().getValue().getRace()));
 
-        avatarView.setImageURI(Uri.parse(mViewModel.getCurrentCharacter().getValue().getAvatarURI()));
+        avatarView.setImageBitmap(StringToBitMap(mViewModel.getCurrentCharacter().getValue().getAvatar()));
 
 
         return view;
@@ -292,42 +300,20 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
             luck.setText(String.valueOf(RemovePoint(Integer.parseInt(luck.getText().toString()))));
         }
         if(v.getId() == R.id.continueButton){ //saving character to database
-            if(currentUnallocatedPoints == 0){
+            if(currentUnallocatedPoints == 0 && bitmap != null){
                 
                 mViewModel.getCurrentCharacter().getValue().setName(Name.getText().toString().trim());
                 mViewModel.getCurrentCharacter().getValue().setRace(Race.getSelectedItem().toString().trim());
-
-                if (avatarURI != null) {
-                    mViewModel.getCurrentCharacter().getValue().setAvatarURI(avatarURI);
-                    avatarURI = null;
-                }
-
                 mViewModel.getCurrentCharacter().getValue().setLevel(level);
                 mViewModel.getCurrentCharacter().getValue().setCharisma(Integer.parseInt(charisma.getText().toString()));
                 mViewModel.getCurrentCharacter().getValue().setVitality(Integer.parseInt(vitality.getText().toString()));
                 mViewModel.getCurrentCharacter().getValue().setStrength(Integer.parseInt(strength.getText().toString()));
                 mViewModel.getCurrentCharacter().getValue().setLuck(Integer.parseInt(luck.getText().toString()));
                 mViewModel.getCurrentCharacter().getValue().setIntelligence(Integer.parseInt(intel.getText().toString()));
+                mViewModel.getCurrentCharacter().getValue().setAvatar(BitMapToString(bitmap));
                 mViewModel.setCurrentCharacter(mViewModel.getCurrentCharacter().getValue());
 
                 root.setValue(mViewModel.getCharacters().getValue());
-
-                /*character.setName(Name.getText().toString().trim());
-                character.setRace(Race.getSelectedItem().toString().trim());
-
-                if (avatarURI != null) {
-                    character.setAvatarURI(avatarURI);
-                    avatarURI = null;
-                }
-
-                character.setLevel(level);
-                character.setCharisma(Integer.parseInt(charisma.getText().toString()));
-                character.setVitality(Integer.parseInt(vitality.getText().toString()));
-                character.setStrength(Integer.parseInt(strength.getText().toString()));
-                character.setLuck(Integer.parseInt(luck.getText().toString()));
-                character.setIntelligence(Integer.parseInt(intel.getText().toString()));
-                mViewModel.setCurrentCharacter(character);*/
-                //mViewModel.addCharacter(character);
 
 
                 Toast.makeText(getContext(), "The following information was edited",Toast.LENGTH_LONG).show();
@@ -347,7 +333,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
                 getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
             }
             else{
-                Toast.makeText(getContext(), "Please allocate all points before continuing",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Please allocate all points and upload an avatar before continuing",Toast.LENGTH_LONG).show();
             }
 
         }
@@ -372,7 +358,14 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
             avatarView.setImageURI(data.getData());
-            avatarURI = data.getData().toString();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), data.getData());
+                int dimension = getSquareCropDimensionForBitmap(bitmap);
+                bitmap = ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension);
+                bitmap = Bitmap.createScaledBitmap(bitmap,200,200, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -393,6 +386,31 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         currentPoints--;
         points.setText(String.valueOf(++currentUnallocatedPoints));
         return currentPoints;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos = new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public int getSquareCropDimensionForBitmap(Bitmap bitmap)
+    {
+        //use the smallest dimension of the image to crop to
+        return Math.min(bitmap.getWidth(), bitmap.getHeight());
     }
 
 

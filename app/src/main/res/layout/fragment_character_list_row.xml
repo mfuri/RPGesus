@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/charAvatar"
             android:layout_width="117dp"
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/avatars" />

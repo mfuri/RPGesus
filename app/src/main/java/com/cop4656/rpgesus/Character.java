@@ -1,10 +1,12 @@
 package com.cop4656.rpgesus;
 
+import android.graphics.Bitmap;
+
 import java.lang.*;
 
 public class Character {
     private String name;
-    private String avatarURI;
+    private String avatar;
     private int level;
     private String race;
     private int strength;
@@ -17,8 +19,12 @@ public class Character {
         return name;
     }
 
-    public String getAvatarURI(){
-        return avatarURI;
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getLevel() {
@@ -55,10 +61,6 @@ public class Character {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public void setAvatarURI(String pictureURI) {
-        this.avatarURI = avatarURI;
     }
 
     public void setRace(String race) {

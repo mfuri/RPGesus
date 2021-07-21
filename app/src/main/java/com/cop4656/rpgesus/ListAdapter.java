@@ -1,10 +1,14 @@
 package com.cop4656.rpgesus;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,6 +43,7 @@ public class ListAdapter extends ArrayAdapter<Character> {
             TextView charLevel = (TextView) v.findViewById(R.id.charLevel);
             TextView charRace = (TextView) v.findViewById(R.id.charRace);
             TextView charSkills = (TextView) v.findViewById(R.id.charSkills);
+            ImageView avatar = (ImageView) v.findViewById(R.id.charAvatar);
 
             if (charName != null) {
                 charName.setText(p.getName().trim());
@@ -52,9 +57,23 @@ public class ListAdapter extends ArrayAdapter<Character> {
             if (charSkills != null){
                 charSkills.setText("S:" + p.getStrength() + " C:" + p.getCharisma() + " I:" + p.getIntelligence() + " L:" + p.getLuck() + " V:" + p.getVitality());
             }
+            if (avatar != null){
+                avatar.setImageBitmap(StringToBitMap(p.getAvatar()));
+            }
         }
 
         return v;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 }
