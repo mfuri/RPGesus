@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
@@ -29,8 +30,11 @@ import android.widget.Toast;
 
 import pub.devrel.easypermissions.*;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lowagie.text.pdf.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,6 +45,10 @@ import static android.app.Activity.RESULT_OK;
  * create an instance of this fragment.
  */
 public class CharacterEditFragment extends Fragment implements View.OnClickListener{
+
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference root = db.getReference().child("Characters");
+
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
 
     private String avatarURI;
@@ -225,6 +233,8 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         Name.setText(mViewModel.getCurrentCharacter().getValue().getName());
         Race.setSelection(getIndex(Race, mViewModel.getCurrentCharacter().getValue().getRace()));
 
+        avatarView.setImageURI(Uri.parse(mViewModel.getCurrentCharacter().getValue().getAvatarURI()));
+
 
         return view;
     }
@@ -283,9 +293,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         }
         if(v.getId() == R.id.continueButton){ //saving character to database
             if(currentUnallocatedPoints == 0){
-
-                Character character = new Character();
-
+                
                 mViewModel.getCurrentCharacter().getValue().setName(Name.getText().toString().trim());
                 mViewModel.getCurrentCharacter().getValue().setRace(Race.getSelectedItem().toString().trim());
 
@@ -301,6 +309,8 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
                 mViewModel.getCurrentCharacter().getValue().setLuck(Integer.parseInt(luck.getText().toString()));
                 mViewModel.getCurrentCharacter().getValue().setIntelligence(Integer.parseInt(intel.getText().toString()));
                 mViewModel.setCurrentCharacter(mViewModel.getCurrentCharacter().getValue());
+
+                root.setValue(mViewModel.getCharacters().getValue());
 
                 /*character.setName(Name.getText().toString().trim());
                 character.setRace(Race.getSelectedItem().toString().trim());

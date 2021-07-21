@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import pub.devrel.easypermissions.*;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lowagie.text.pdf.*;
 
 import java.util.LinkedList;
@@ -42,6 +44,8 @@ import static android.app.Activity.RESULT_OK;
  */
 public class CharacterCreationFragment extends Fragment implements View.OnClickListener{
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference root = db.getReference().child("Characters");
 
     private String avatarURI;
     private int currentUnallocatedPoints;
@@ -62,6 +66,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     private Button continueButton;
     private ImageView avatarView;
     private Button avatarButton;
+    private Character character = new Character();
 
 
     private EditText strength;
@@ -261,13 +266,13 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         if(v.getId() == R.id.continueButton){ //saving character to database
             if(currentUnallocatedPoints == 0){
 
-                Character character = new Character();
                 character.setName(Name.getText().toString().trim());
                 character.setRace(Race.getSelectedItem().toString().trim());
-                if (avatarURI != null) {
+                /*if (avatarURI != null) {
                     character.setAvatarURI(avatarURI);
                     avatarURI = null;
-                }
+                }*/
+                character.setAvatarURI(avatarView.getTag().toString());
                 character.setLevel(level);
                 character.setCharisma(Integer.parseInt(charisma.getText().toString()));
                 character.setVitality(Integer.parseInt(vitality.getText().toString()));
@@ -275,6 +280,8 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 character.setLuck(Integer.parseInt(luck.getText().toString()));
                 character.setIntelligence(Integer.parseInt(intel.getText().toString()));
                 mViewModel.addCharacter(character);
+
+                root.setValue(mViewModel.getCharacters().getValue());
 
 
                 Toast.makeText(getContext(), "The following information was saved to the database",Toast.LENGTH_LONG).show();
@@ -319,7 +326,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
             avatarView.setImageURI(data.getData());
-            avatarURI = data.getData().toString();
+            avatarView.setTag(data.getData().toString());
         }
     }
 

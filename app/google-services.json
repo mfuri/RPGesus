@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "385823332164",
+    "project_id": "rpgesus-dda89",
+    "storage_bucket": "rpgesus-dda89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385823332164:android:efa0c16b61d003574b6911",
+        "android_client_info": {
+          "package_name": "com.cop4656.rpgesus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385823332164-1hmhkq1uupm9e2jol0blrulcb6vl235o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuHzVfWWOUniIPD_raeqZ1WDEFLURvFpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385823332164-1hmhkq1uupm9e2jol0blrulcb6vl235o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
