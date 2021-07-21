@@ -328,12 +328,12 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == IMAGE_CODE) {
-            avatarView.setImageURI(data.getData());
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), data.getData());
                 int dimension = getSquareCropDimensionForBitmap(bitmap);
                 bitmap = ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension);
                 bitmap = Bitmap.createScaledBitmap(bitmap,200,200, true);
+                avatarView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }

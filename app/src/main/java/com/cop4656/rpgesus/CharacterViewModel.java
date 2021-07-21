@@ -50,7 +50,13 @@ public class CharacterViewModel extends ViewModel {
         LinkedList<Character> tempList = characters.getValue();
         assert tempList != null;
         tempList.add(t);
+        characters.setValue(tempList);
+    }
 
+    public void deleteCharacter(Character t){
+        LinkedList<Character> tempList = characters.getValue();
+        assert tempList != null;
+        tempList.remove(t);
         characters.setValue(tempList);
     }
 }
