@@ -1,7 +1,9 @@
 package com.cop4656.rpgesus;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -26,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cop4656.rpgesus.Character;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.LinkedList;
 
@@ -34,18 +38,45 @@ public class ListFragment extends Fragment {
 
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
     ListView listView;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference root = db.getReference().child("Characters");
 
     AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Character currentCharacter = (Character) parent.getItemAtPosition(position);
             mViewModel.setCurrentCharacter(currentCharacter);
-            Fragment editFragment = new CharacterEditFragment();
+
+            String [] options = {"Edit","Delete" };
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Choose an option");
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (which == 0)
+                    {
+                        Fragment editFragment = new CharacterEditFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.list_fragment, editFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit(); //going to the character_creation fragment
+                    }
+                    else if (which == 1)
+                    {
+                        mViewModel.deleteCharacter(mViewModel.getCurrentCharacter().getValue());
+                        root.setValue(mViewModel.getCharacters().getValue());
+                    }
+                }
+            });
+            builder.show();
+
+            /*Fragment editFragment = new CharacterEditFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.list_fragment, editFragment);
             fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit(); //going to the character_creation fragment
+            fragmentTransaction.commit(); //going to the character_creation fragment*/
         }
     };
 
