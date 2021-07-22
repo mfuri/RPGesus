@@ -15,6 +15,7 @@ import java.util.List;
 public class CharacterViewModel extends ViewModel {
     private MutableLiveData<LinkedList<Character>> characters;
     private MutableLiveData<Character> currentCharacter;
+    private Boolean darkMode = false;
 
 
     public LiveData<LinkedList<Character>> getCharacters() {
@@ -58,5 +59,13 @@ public class CharacterViewModel extends ViewModel {
         assert tempList != null;
         tempList.remove(t);
         characters.setValue(tempList);
+    }
+
+    public Boolean isDarkMode(){
+        return darkMode;
+    }
+
+    public void setDarkMode(Boolean darkMode){
+        this.darkMode = darkMode;
     }
 }

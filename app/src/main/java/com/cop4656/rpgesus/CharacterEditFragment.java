@@ -42,7 +42,9 @@ import com.lowagie.text.pdf.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -63,6 +65,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
     private TextView points;
     private int level;
     private Bitmap bitmap;
+    private Boolean darkMode;
 
     private Button strengthPlus;
     private Button strengthMinus;
@@ -85,10 +88,17 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
     private EditText charisma;
     private EditText vitality;
     private EditText luck;
-    //private EditText level;
+
+    private TextView viewStrength;
+    private TextView viewIntel;
+    private TextView viewCharisma;
+    private TextView viewVitality;
+    private TextView viewLuck;
+    private TextView pointsLabel;
 
     private EditText Name;
     private Spinner Race;
+    private TextView setRace;
 
     public static final int IMAGE_CODE = 1;
 
@@ -129,6 +139,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            darkMode = getArguments().getBoolean("DarkMode");
         }
     }
 
@@ -173,6 +184,12 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         goBackButton.setOnClickListener(this);
         avatarButton.setOnClickListener(this);
 
+        viewStrength = (TextView) view.findViewById(R.id.strengthLabel);
+        viewCharisma = (TextView) view.findViewById(R.id.charismaLabel);
+        viewIntel = (TextView) view.findViewById(R.id.intelligenceLabel);
+        viewVitality = (TextView) view.findViewById(R.id.vitalityLabel);
+        viewLuck = (TextView) view.findViewById(R.id.luckLabel);
+
         //Getting TextViews to display current skill point values
 
         strength = (EditText) view.findViewById(R.id.strengthPointsEditText);
@@ -192,6 +209,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         //Getting points that are unallocated to the user
 
         points = (TextView) view.findViewById(R.id.remainingSkillPointsView);
+        pointsLabel = (TextView) view.findViewById(R.id.pointsLabel);
         points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,11 +255,66 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         //Getting name and race selection
         Name = (EditText) view.findViewById(R.id.characterNameEditText);
         Race = (Spinner) view.findViewById(R.id.raceSpinner) ;
+        setRace = (TextView) view.findViewById(R.id.setRaceTextView);
 
         Name.setText(mViewModel.getCurrentCharacter().getValue().getName());
         Race.setSelection(getIndex(Race, mViewModel.getCurrentCharacter().getValue().getRace()));
 
         avatarView.setImageBitmap(StringToBitMap(mViewModel.getCurrentCharacter().getValue().getAvatar()));
+
+        List<String> races = Arrays.asList(getResources().getStringArray(R.array.races));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, races);
+        Race.setAdapter(adapter);
+
+        if (mViewModel.isDarkMode())
+        {
+            view.setBackgroundColor(getResources().getColor(R.color.darkmode));
+            Name.setTextColor(getResources().getColor(R.color.rpg_white));
+            Name.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            strength.setTextColor(getResources().getColor(R.color.rpg_white));
+            intel.setTextColor(getResources().getColor(R.color.rpg_white));
+            vitality.setTextColor(getResources().getColor(R.color.rpg_white));
+            charisma.setTextColor(getResources().getColor(R.color.rpg_white));
+            luck.setTextColor(getResources().getColor(R.color.rpg_white));
+            viewLuck.setTextColor(getResources().getColor(R.color.rpg_white));
+            viewStrength.setTextColor(getResources().getColor(R.color.rpg_white));
+            viewVitality.setTextColor(getResources().getColor(R.color.rpg_white));
+            viewCharisma.setTextColor(getResources().getColor(R.color.rpg_white));
+            viewIntel.setTextColor(getResources().getColor(R.color.rpg_white));
+            setRace.setTextColor(getResources().getColor(R.color.rpg_white));
+            strength.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            charisma.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            vitality.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            luck.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            intel.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
+            pointsLabel.setTextColor(getResources().getColorStateList(R.color.rpg_white));
+            points.setTextColor(getResources().getColorStateList(R.color.rpg_white));
+        }
+        if (!mViewModel.isDarkMode())
+        {
+            view.setBackgroundColor(getResources().getColor(R.color.rpg_white));
+            Name.setTextColor(getResources().getColor(R.color.darkmode));
+            Name.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            strength.setTextColor(getResources().getColor(R.color.darkmode));
+            intel.setTextColor(getResources().getColor(R.color.darkmode));
+            vitality.setTextColor(getResources().getColor(R.color.darkmode));
+            charisma.setTextColor(getResources().getColor(R.color.darkmode));
+            luck.setTextColor(getResources().getColor(R.color.darkmode));
+            viewLuck.setTextColor(getResources().getColor(R.color.darkmode));
+            viewStrength.setTextColor(getResources().getColor(R.color.darkmode));
+            viewVitality.setTextColor(getResources().getColor(R.color.darkmode));
+            viewCharisma.setTextColor(getResources().getColor(R.color.darkmode));
+            viewIntel.setTextColor(getResources().getColor(R.color.darkmode));
+            setRace.setTextColor(getResources().getColor(R.color.darkmode));
+
+            strength.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            charisma.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            vitality.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            luck.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            intel.setBackgroundTintList(getResources().getColorStateList(R.color.darkmode));
+            pointsLabel.setTextColor(getResources().getColorStateList(R.color.darkmode));
+            points.setTextColor(getResources().getColorStateList(R.color.darkmode));
+        }
 
 
         return view;

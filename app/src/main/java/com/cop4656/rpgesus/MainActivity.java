@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = new ViewModelProvider(this).get(CharacterViewModel.class);
         loadCharacters();
 
-
-
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

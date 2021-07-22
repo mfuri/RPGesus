@@ -201,6 +201,7 @@
                     android:layout_marginEnd="64dp"
                     android:entries="@array/races"
                     android:spinnerMode="dialog"
+                    android:background="@android:drawable/btn_dropdown"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
 
@@ -315,7 +316,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/vitalityPlusButton" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/setRaceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
