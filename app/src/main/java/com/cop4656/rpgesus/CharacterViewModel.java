@@ -2,12 +2,19 @@ package com.cop4656.rpgesus;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cop4656.rpgesus.Character;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +22,11 @@ import java.util.List;
 public class CharacterViewModel extends ViewModel {
     private MutableLiveData<LinkedList<Character>> characters;
     private MutableLiveData<Character> currentCharacter;
+
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference dbDarkMode = db.getReference().child("DarkMode");
+
+
     private Boolean darkMode = false;
 
 
@@ -66,6 +78,7 @@ public class CharacterViewModel extends ViewModel {
     }
 
     public void setDarkMode(Boolean darkMode){
+        dbDarkMode.setValue(darkMode);
         this.darkMode = darkMode;
     }
 }

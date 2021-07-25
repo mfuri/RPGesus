@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference root = db.getReference().child("Characters");
+    private DatabaseReference darkMode = db.getReference().child("DarkMode");
 
     private CharacterViewModel mViewModel;
     @Override
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mViewModel = new ViewModelProvider(this).get(CharacterViewModel.class);
-        loadCharacters();
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -58,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         root.addListenerForSingleValueEvent(valueEventListener);
 
-    }
-
-    private void loadCharacters() {
-        //SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        //LinkedList<Character> tempList = new LinkedList<>();
-        //mViewModel.setCharacters(tempList);
     }
 
 }

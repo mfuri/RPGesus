@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,21 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class welcomeFragment extends Fragment {
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference darkMode = db.getReference().child("DarkMode");
+
+
+
 
     private com.cop4656.rpgesus.CharacterViewModel mViewModel;
     //private Boolean darkMode = false;
@@ -43,16 +57,32 @@ public class welcomeFragment extends Fragment {
         Switch switchDarkMode = (Switch) view.findViewById(R.id.switchDarkMode);
         mViewModel =  new ViewModelProvider(requireActivity()).get(com.cop4656.rpgesus.CharacterViewModel.class);
 
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mViewModel.setDarkMode(dataSnapshot.getValue(Boolean.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", databaseError.getMessage());
+            }
+        };
+
+        darkMode.addListenerForSingleValueEvent(valueEventListener);
+
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(switchDarkMode.isChecked()){
+                    darkMode.setValue(true);
                     mViewModel.setDarkMode(true);
                     view.setBackgroundColor(getResources().getColor(R.color.darkmode));
                     switchDarkMode.setTextColor(getResources().getColor(R.color.rpg_white));
                 }
                 else if (!switchDarkMode.isChecked())
                 {
+                    darkMode.setValue(false);
                     mViewModel.setDarkMode(false);
                     view.setBackgroundColor(getResources().getColor(R.color.rpg_white));
                     switchDarkMode.setTextColor(getResources().getColor(R.color.darkmode));
