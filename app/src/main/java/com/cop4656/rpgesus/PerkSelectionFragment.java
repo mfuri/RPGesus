@@ -17,6 +17,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PerkSelectionFragment#newInstance} factory method to
@@ -32,7 +35,8 @@ public class PerkSelectionFragment extends Fragment {
     private byte [] byteArray;
     private Boolean darkMode;
     private Character character;
-
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference root = db.getReference().child("Characters");
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -316,6 +320,8 @@ public class PerkSelectionFragment extends Fragment {
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                root.setValue(mViewModel.getCharacters().getValue());
+
                 Fragment welcomeFrag = new welcomeFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -330,6 +336,8 @@ public class PerkSelectionFragment extends Fragment {
         characterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                root.setValue(mViewModel.getCharacters().getValue());
+
                 Fragment CharacterSheet = new CharacterSheetFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
