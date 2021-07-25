@@ -92,7 +92,7 @@
                     android:typeface="monospace"
                     app:layout_constraintStart_toEndOf="@+id/charSheetLevelView"
                     app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
-
+                <!--
                 <Button
                     android:id="@+id/levelUpButton"
                     android:layout_width="40dp"
@@ -106,7 +106,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
-
+                -->
                 <TextView
                     android:id="@+id/charSheetStrengthView"
                     android:layout_width="wrap_content"

@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 
 /**
@@ -171,7 +173,7 @@ public class CharacterSheetFragment extends Fragment {
             }
         });
 
-        Button levelUpButton = (Button) view.findViewById(R.id.levelUpButton);
+        /*Button levelUpButton = (Button) view.findViewById(R.id.levelUpButton);
 
         levelUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +188,7 @@ public class CharacterSheetFragment extends Fragment {
                     Toast.makeText(getContext(), "You are already max level. You can not level up further", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 
         Button exportButton = (Button) view.findViewById(R.id.exportButton);
 
@@ -304,7 +306,12 @@ public class CharacterSheetFragment extends Fragment {
 
         try {
             Document doc = new Document();
-
+            doc.setMargins(0,0,0,0);
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            int width = display.getWidth();
+            int height = display.getHeight();
+            Rectangle rect = new Rectangle(width, height);
+            doc.setPageSize(rect);
             PdfWriter.getInstance(doc, new FileOutputStream(file));
             doc.open();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -317,11 +324,12 @@ public class CharacterSheetFragment extends Fragment {
         }
     }
 
-    public static Bitmap getBitmapFromView(View view) {
+    /*public static Bitmap getBitmapFromView(View view) {
         //Define a bitmap with the same size as the view
         Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
+        canvas.scale(752, 1120);
         //Get the view's background
         Drawable bgDrawable =view.getBackground();
         if (bgDrawable!=null)
@@ -334,12 +342,13 @@ public class CharacterSheetFragment extends Fragment {
         view.draw(canvas);
         //return the bitmap
         return returnedBitmap;
-    }
+    }*/
 
     private void addImage(Document doc, byte[] byteArray) {
         Image image = null;
         try {
             image = Image.getInstance(byteArray);
+            image.setAlignment(Image.ALIGN_CENTER);
         } catch (BadElementException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
