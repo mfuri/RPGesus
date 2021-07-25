@@ -1,23 +1,47 @@
 package com.cop4656.rpgesus;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Environment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +54,7 @@ public class CharacterSheetFragment extends Fragment {
     private TextView points;
     private int playerLevel;
     private Bitmap bitmap;
+    private Bitmap exportbmp;
     private Boolean darkMode;
     private CharacterViewModel mViewModel;
 
@@ -163,6 +188,15 @@ public class CharacterSheetFragment extends Fragment {
             }
         });
 
+        Button exportButton = (Button) view.findViewById(R.id.exportButton);
+
+        exportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createPDF(v);
+            }
+        });
+
 
         avatar.setImageBitmap(StringToBitMap(mViewModel.getCurrentCharacter().getValue().getAvatar()));
         name.setText(character.getName());
@@ -245,6 +279,78 @@ public class CharacterSheetFragment extends Fragment {
         } catch(Exception e) {
             e.getMessage();
             return null;
+        }
+    }
+
+    private void createPDF(View v) {
+        File dir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "CharacterSheets");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        View screenView = v.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        exportbmp = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+
+        /*LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+        FrameLayout root = (FrameLayout) inflater.inflate(R.layout.fragment_character_sheet, null);
+        root.setDrawingCacheEnabled(true);
+        exportbmp = getBitmapFromView(getActivity().getWindow().findViewById(R.id.sheetFrameLayout));*/
+
+        File file = new File(dir, mViewModel.getCurrentCharacter().getValue().getName() +
+                "_CharacterSheet.pdf");
+
+        try {
+            Document doc = new Document();
+
+            PdfWriter.getInstance(doc, new FileOutputStream(file));
+            doc.open();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            exportbmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            addImage(doc, byteArray);
+            doc.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+    private void addImage(Document doc, byte[] byteArray) {
+        Image image = null;
+        try {
+            image = Image.getInstance(byteArray);
+        } catch (BadElementException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            doc.add(image);
+        } catch (DocumentException e) {
+            e.printStackTrace();
         }
     }
 
