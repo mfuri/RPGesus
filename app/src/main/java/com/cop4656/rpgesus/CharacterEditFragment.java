@@ -403,7 +403,14 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
                 contentValues.put(CharacterContentProvider.COLUMN_LEVEL, String.valueOf(level));
                 //contentValues.put(CharacterContentProvider.COLUMN_AVATAR, avatarURI);
 
-                getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
+               // getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
+
+                Fragment perkSelectionFragment = new PerkSelectionFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.list_fragment, perkSelectionFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit(); //going to the character_creation fragment
             }
             else{
                 Toast.makeText(getContext(), "Please allocate all points and upload an avatar before continuing",Toast.LENGTH_LONG).show();

@@ -60,7 +60,7 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
 
     private String avatarURI;
     private int currentUnallocatedPoints;
-    private int level = 10;
+    private int level = 1;
     private TextView points;
     private Bitmap bitmap;
     private byte [] byteArray;
@@ -217,12 +217,12 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (Integer.parseInt(input.getText().toString()) < 1 || Integer.parseInt(input.getText().toString()) > 70)
+                        if (Integer.parseInt(input.getText().toString()) < 1 || Integer.parseInt(input.getText().toString()) > 30)
                             Toast.makeText(getContext(), "Invalid level",Toast.LENGTH_LONG).show();
                         else {
                             level = Integer.parseInt(input.getText().toString());
-                            points.setText(String.valueOf(level));
-                            currentUnallocatedPoints = level;
+                            points.setText(String.valueOf((level / 2) + 10)); //this will give users 10 points at rank level 1 and 1 point every level after.
+                            currentUnallocatedPoints = (level / 2) + 10;
                             strength.setText(String.valueOf(0));
                             charisma.setText(String.valueOf(0));
                             luck.setText(String.valueOf(0));
@@ -359,12 +359,24 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 character.setStrength(Integer.parseInt(strength.getText().toString()));
                 character.setLuck(Integer.parseInt(luck.getText().toString()));
                 character.setIntelligence(Integer.parseInt(intel.getText().toString()));
+
+                character.setWizard(false);
+                character.setGambler(false);
+                character.setUncivilized(false);
+                character.setHeartbreaker(false);
+                character.setMarathon(false);
+                character.setBook(false);
+                character.setTreasure(false);
+                character.setIron(false);
+                character.setPolitician(false);
+
                 mViewModel.addCharacter(character);
+                mViewModel.setCurrentCharacter(character);
 
                 root.setValue(mViewModel.getCharacters().getValue());
 
 
-                Toast.makeText(getContext(), "The following information was saved to the database",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "The following character was saved to the database",Toast.LENGTH_LONG).show();
 
                 ContentValues contentValues = new ContentValues();
 
@@ -376,9 +388,27 @@ public class CharacterCreationFragment extends Fragment implements View.OnClickL
                 contentValues.put(CharacterContentProvider.COLUMN_VITALITY, vitality.getText().toString().trim());
                 contentValues.put(CharacterContentProvider.COLUMN_LUCK, luck.getText().toString().trim());
                 contentValues.put(CharacterContentProvider.COLUMN_LEVEL, String.valueOf(level));
+                //PERKS
+                contentValues.put(CharacterContentProvider.COLUMN_WIZARD, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_GAMBLER, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_UNCIVILIZED, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_HEARTBREAKER, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_MARATHON, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_BOOK, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_TREASURE, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_IRON, "false");
+                contentValues.put(CharacterContentProvider.COLUMN_POLITICIAN, "false");
+
                 //contentValues.put(CharacterContentProvider.COLUMN_AVATAR, avatarURI);
 
-                getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
+                //getActivity().getApplicationContext().getContentResolver().insert(CharacterContentProvider.CONTENT_URI, contentValues);
+
+                Fragment perkSelectionFragment = new PerkSelectionFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.list_fragment, perkSelectionFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit(); //going to the character_creation fragment
             }
             else{
                 Toast.makeText(getContext(), "Please allocate all points and upload an avatar before continuing",Toast.LENGTH_LONG).show();

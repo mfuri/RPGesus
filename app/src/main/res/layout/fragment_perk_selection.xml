@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerkSelectionFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="50dp">
+
+                <TextView
+                    android:id="@+id/headerPerkView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Select your perks"
+                    android:textAllCaps="false"
+                    android:textColor="#000000"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/unallocated1View"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="73dp"
+                    android:layout_marginTop="36dp"
+                    android:text="You currently have: "
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/headerPerkView" />
+
+                <TextView
+                    android:id="@+id/unallocated2View"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:text=" unallocated perk points."
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toEndOf="@+id/unallocatedPerkPoints"
+                    app:layout_constraintTop_toBottomOf="@+id/headerPerkView" />
+
+                <TextView
+                    android:id="@+id/unallocatedPerkPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="37dp"
+                    android:text="5"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toEndOf="@+id/unallocated1View"
+                    app:layout_constraintTop_toBottomOf="@+id/headerPerkView" />
+
+                <TextView
+                    android:id="@+id/level10PerkView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="158dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Level 10 Perks:"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/unallocated1View" />
+
+                <TextView
+                    android:id="@+id/wizardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="72dp"
+                    android:text="You're a wizard!"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/unallocated1View" />
+
+                <TextView
+                    android:id="@+id/wizardDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You've displayed an\n aptitude for spells and\n charms thus far. Be careful\n not to burn anything down! \n + 1 Intelligence\n + 1 Vitality\n + 5% magic damage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/wizardView" />
+
+                <Switch
+                    android:id="@+id/wizardSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="193dp"
+                    android:layout_marginTop="72dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/wizardView"
+                    app:layout_constraintTop_toBottomOf="@+id/unallocated2View" />
+
+                <TextView
+                    android:id="@+id/gamblerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="The Gambler"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/wizardDescView" />
+
+                <TextView
+                    android:id="@+id/gamblerDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You seem to be luckier\n than most and are always\n finding yourself on the\n winning end of most gambles.\n +1 Luck\n + 15% Critical Hit Chance\n + 5 % Critical Hit Damage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gamblerView" />
+
+                <Switch
+                    android:id="@+id/gamblerSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="208dp"
+                    android:layout_marginTop="132dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/gamblerView"
+                    app:layout_constraintTop_toBottomOf="@+id/wizardSwitch" />
+
+                <TextView
+                    android:id="@+id/uncivilizedView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="So Uncivilized"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gamblerDescView" />
+
+                <TextView
+                    android:id="@+id/uncivilizedDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Never been much for talking\nyour way out of issues\n as you'd rather solve your problem\n by breaking things. Not many\n people would be willing to get on\n your badside!\n + 2 Strength\n + 1 Vitality\n - 1 Charisma\n"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/uncivilizedView" />
+
+                <Switch
+                    android:id="@+id/uncivilizedSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="201dp"
+                    android:layout_marginTop="132dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/uncivilizedView"
+                    app:layout_constraintTop_toBottomOf="@+id/gamblerSwitch" />
+
+                <TextView
+                    android:id="@+id/level20PerkView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="158dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Level 20 Perks:"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/uncivilizedDescView" />
+
+                <TextView
+                    android:id="@+id/heartBreakerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="25dp"
+                    android:text="Heartbreaker"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/uncivilizedDescView" />
+
+                <TextView
+                    android:id="@+id/heartbreakerDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You are as suave as dangerous.\nWhether in combat or in dialog,\nyou get benefits from being across\n the opposite sex.\n + 1 Charisma\n + 10% damage against\n the opposite sex\n + 10% persuasion against \n the opposite sex"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heartBreakerView" />
+
+                <Switch
+                    android:id="@+id/heartbreakerSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="69dp"
+                    android:layout_marginTop="200dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/heartbreakerDescView"
+                    app:layout_constraintTop_toBottomOf="@+id/uncivilizedSwitch" />
+
+                <TextView
+                    android:id="@+id/martathonView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Marathon Runner"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heartbreakerDescView" />
+
+                <TextView
+                    android:id="@+id/martathonDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Using your passion for running,\nYou are able to take a punch better \nand stamina is no issue for you!\n + 1 Vitality \n + 1 Combat move opportunity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/martathonView" />
+
+                <Switch
+                    android:id="@+id/marathonSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="170dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/martathonDescView"
+                    app:layout_constraintTop_toBottomOf="@+id/heartbreakerSwitch" />
+
+                <TextView
+                    android:id="@+id/bookView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Book Worm"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/martathonDescView" />
+
+                <TextView
+                    android:id="@+id/bookDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You'd much rather be reading a book\n than be anywhere else. See?\n Being a nerd does have it's advantages!\n + 1 Intelligience\n + 10% XP Gain"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bookView" />
+
+                <Switch
+                    android:id="@+id/bookSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="218dp"
+                    android:layout_marginTop="75dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/bookView"
+                    app:layout_constraintTop_toBottomOf="@+id/marathonSwitch" />
+
+                <TextView
+                    android:id="@+id/level30PerkView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="158dp"
+                    android:layout_marginTop="11dp"
+                    android:text="Level 30 Perks:"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDescView" />
+
+                <TextView
+                    android:id="@+id/treasureView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Treasure Hunter"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDescView" />
+
+                <TextView
+                    android:id="@+id/treasureDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You are able to find value in\n things others may deem as junk.\n+ 1 Luck\n+ 15% gold gain "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/treasureView" />
+
+                <Switch
+                    android:id="@+id/treasureSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="54dp"
+                    android:layout_marginTop="135dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/level30PerkView"
+                    app:layout_constraintTop_toBottomOf="@+id/bookSwitch" />
+
+                <TextView
+                    android:id="@+id/ironView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="23dp"
+                    android:text="Iron Bones"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/treasureDescView" />
+
+                <TextView
+                    android:id="@+id/ironDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Some say you have bones made\n out of iron! Rumors are that\nyou are nigh indestructible\n+1 Vitality\n+1 Strength"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ironView" />
+
+                <Switch
+                    android:id="@+id/ironSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="83dp"
+                    android:layout_marginTop="100dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/ironDescView"
+                    app:layout_constraintTop_toBottomOf="@+id/treasureSwitch" />
+
+                <TextView
+                    android:id="@+id/politicianView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Politician"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ironDescView" />
+
+                <TextView
+                    android:id="@+id/politicianDescView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="You are able to convince those around\nyou that you are out for their best\n interest. Nice!\n+ 1 Charisma\n+ 1 Follower"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/politicianView" />
+
+                <Switch
+                    android:id="@+id/politicianSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="232dp"
+                    android:layout_marginTop="76dp"
+                    android:text="Perk"
+                    app:layout_constraintStart_toEndOf="@+id/politicianView"
+                    app:layout_constraintTop_toBottomOf="@+id/ironSwitch" />
+
+                <Button
+                    android:id="@+id/perkBackButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="9dp"
+                    android:text="Go Back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/politicianDescView" />
+
+                <Button
+                    android:id="@+id/perkCharSheetButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="111dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="Character Sheet"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/politicianSwitch" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -34,6 +34,17 @@ public class CharacterContentProvider extends ContentProvider {
     public final static String COLUMN_VITALITY = "Vitality";
     public final static String COLUMN_LUCK = "Luck";
     public final static String COLUMN_AVATAR = "Avatar";
+    //THE FOLLOWING PERK COLUMNS WILL BE STRINGS BUT WILL ONLY EVER BE "TRUE" OR "FALSE"
+    public final static String COLUMN_WIZARD = "Wizard";
+    public final static String COLUMN_GAMBLER = "Gambler";
+    public final static String COLUMN_UNCIVILIZED = "Uncivilized";
+    public final static String COLUMN_HEARTBREAKER = "Heartbreaker";
+    public final static String COLUMN_MARATHON = "Marathon";
+    public final static String COLUMN_BOOK = "Book";
+    public final static String COLUMN_TREASURE = "Treasure";
+    public final static String COLUMN_IRON = "Iron";
+    public final static String COLUMN_POLITICIAN = "Politican";
+
 
 
     public static final String AUTHORITY = "com.cop4656.rpgesus";
@@ -63,6 +74,22 @@ public class CharacterContentProvider extends ContentProvider {
             COLUMN_AVATAR +
             " TEXT,"+
             COLUMN_LUCK +
+            " TEXT,"+
+            COLUMN_WIZARD +
+            " TEXT,"+
+            COLUMN_GAMBLER +
+            " TEXT,"+
+            COLUMN_UNCIVILIZED +
+            " TEXT,"+
+            COLUMN_HEARTBREAKER +
+            " TEXT,"+
+            COLUMN_BOOK +
+            " TEXT,"+
+            COLUMN_TREASURE +
+            " TEXT,"+
+            COLUMN_IRON +
+            " TEXT,"+
+            COLUMN_POLITICIAN +
             " TEXT)";
 
     public CharacterContentProvider() {
@@ -82,7 +109,6 @@ public class CharacterContentProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
 
-
         String name = values.getAsString(COLUMN_NAME).trim();
         String race = values.getAsString(COLUMN_RACE).trim();
         //String avatar = null; //values.getAsString(COLUMN_AVATAR).trim();
@@ -92,6 +118,17 @@ public class CharacterContentProvider extends ContentProvider {
         String vitality = values.getAsString(COLUMN_VITALITY).trim();
         String luck = values.getAsString(COLUMN_LUCK).trim();
         String level = values.getAsString(COLUMN_LEVEL).trim();
+        //PERKS
+        String wizard = values.getAsString(COLUMN_WIZARD).trim();
+        String gambler = values.getAsString(COLUMN_GAMBLER).trim();
+        String uncivilized = values.getAsString(COLUMN_UNCIVILIZED).trim();
+        String heartbreaker = values.getAsString(COLUMN_HEARTBREAKER).trim();
+        String marathon = values.getAsString(COLUMN_MARATHON).trim();
+        String book = values.getAsString(COLUMN_BOOK).trim();
+        String treasure = values.getAsString(COLUMN_TREASURE).trim();
+        String iron = values.getAsString(COLUMN_IRON).trim();
+        String politician = values.getAsString(COLUMN_POLITICIAN).trim();
+
 
         if(name.equals("")){ return null;}
         if(race.equals("")){ return null;}
@@ -102,7 +139,15 @@ public class CharacterContentProvider extends ContentProvider {
         if(vitality.equals("")){ return null;}
         if(luck.equals("")){ return null;}
         if (level.equals("")) { return null;}
-
+        if(wizard.equals("")){ return null;}
+        if(gambler.equals("")){ return null;}
+        if(uncivilized.equals("")){ return null;}
+        if(heartbreaker.equals("")){ return null;}
+        if(marathon.equals("")){ return null;}
+        if(book.equals("")){ return null;}
+        if(treasure.equals("")){ return null;}
+        if(iron.equals("")){ return null;}
+        if(politician.equals("")){ return null;}
 
         long id = mOpenHelper.getWritableDatabase().insert(TABLE_NAMESTABLE, null, values);
 

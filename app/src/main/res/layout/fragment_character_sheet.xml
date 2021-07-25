@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterSheetFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="50dp">
+
+                <ImageView
+                    android:id="@+id/charSheetAvatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <EditText
+                    android:id="@+id/charSheetName"
+                    android:layout_width="283dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="1"
+                    android:duplicateParentState="false"
+                    android:editable="false"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/charSheetRace"
+                    android:layout_width="186dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_weight="1"
+                    android:text="Race"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetName" />
+
+                <TextView
+                    android:id="@+id/charSheetLevelView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_weight="1"
+                    android:text="Level:"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintBottom_toTopOf="@+id/charSheetStrengthView"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/charSheetLevel"
+                    android:layout_width="43dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="71dp"
+                    android:layout_weight="1"
+                    android:text="50"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetLevelView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
+
+                <Button
+                    android:id="@+id/levelUpButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="67dp"
+                    android:layout_marginEnd="113dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/rpg_darkgreen"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
+
+                <TextView
+                    android:id="@+id/charSheetStrengthView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Strength:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetLevelView" />
+
+                <TextView
+                    android:id="@+id/charSheetIntelView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Intelligence:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetStrengthView" />
+
+                <TextView
+                    android:id="@+id/charSheetCharismaView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Charisma:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetIntelView" />
+
+                <TextView
+                    android:id="@+id/charSheetVitalityView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Vitality:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetCharismaView" />
+
+                <TextView
+                    android:id="@+id/charSheetLuckView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Luck:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetVitalityView" />
+
+                <TextView
+                    android:id="@+id/charSheetStrength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="29dp"
+                    android:text="0"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetStrengthView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetLevel" />
+
+                <TextView
+                    android:id="@+id/charSheetIntel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="32dp"
+                    android:text="0"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetIntelView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetStrength" />
+
+                <TextView
+                    android:id="@+id/charSheetCharisma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="32dp"
+                    android:text="0"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetCharismaView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetIntel" />
+
+                <TextView
+                    android:id="@+id/charSheetVitality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="62dp"
+                    android:layout_marginTop="32dp"
+                    android:text="0"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetVitalityView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetCharisma" />
+
+                <TextView
+                    android:id="@+id/charSheetLuck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="95dp"
+                    android:layout_marginTop="32dp"
+                    android:text="0"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetLuckView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetVitality" />
+
+                <Button
+                    android:id="@+id/charSheetHomeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="156dp"
+                    android:layout_marginTop="178dp"
+                    android:text="Home"
+                    app:layout_constraintStart_toEndOf="@+id/viewPerksButton"
+                    app:layout_constraintTop_toBottomOf="@+id/currentModifiersLabel" />
+
+                <Button
+                    android:id="@+id/viewPerksButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="178dp"
+                    android:text="Perks"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/currentPerksLabel" />
+
+                <TextView
+                    android:id="@+id/currentPerksView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="508dp"
+                    android:text="Test"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/modifiersView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="204dp"
+                    android:layout_marginTop="16dp"
+                    android:text="test"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/currentModifiersLabel" />
+
+                <TextView
+                    android:id="@+id/currentPerksLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="27dp"
+                    android:text="Current Perks:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetLuckView" />
+
+                <TextView
+                    android:id="@+id/currentModifiersLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="69dp"
+                    android:layout_marginTop="26dp"
+                    android:text="Current Modifiers:"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toEndOf="@+id/currentPerksLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetLuck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

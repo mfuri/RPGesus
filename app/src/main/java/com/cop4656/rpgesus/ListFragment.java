@@ -50,7 +50,7 @@ public class ListFragment extends Fragment {
             Character currentCharacter = (Character) parent.getItemAtPosition(position);
             mViewModel.setCurrentCharacter(currentCharacter);
 
-            String [] options = {"Edit","Delete"};
+            String [] options = {"Edit","Delete", "View"};
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Choose an option");
             builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -69,6 +69,14 @@ public class ListFragment extends Fragment {
                     {
                         mViewModel.deleteCharacter(mViewModel.getCurrentCharacter().getValue());
                         root.setValue(mViewModel.getCharacters().getValue());
+                    }
+                    else{
+                        Fragment CharacterSheet = new CharacterSheetFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.list_fragment, CharacterSheet);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit(); //going to the character_creation fragment
                     }
                 }
             });

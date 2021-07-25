@@ -14,5 +14,6 @@
     <color name="rpg_orange">#BF8422</color>
     <color name="rpg_green">#68B374</color>
     <color name="rpg_lightblue">#23e4ff</color>
+    <color name="rpg_darkgreen">#014421</color>
     <color name="darkmode">#121212</color>
 </resources>
