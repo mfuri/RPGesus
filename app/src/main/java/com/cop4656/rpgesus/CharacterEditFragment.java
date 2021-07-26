@@ -139,7 +139,6 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            darkMode = getArguments().getBoolean("DarkMode");
         }
     }
 
