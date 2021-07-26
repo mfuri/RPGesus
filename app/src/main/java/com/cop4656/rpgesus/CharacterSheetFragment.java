@@ -271,6 +271,27 @@ public class CharacterSheetFragment extends Fragment {
             perkView.setTextColor(getResources().getColor(R.color.rpg_white));
             modifiersView.setTextColor(getResources().getColor(R.color.rpg_white));
         }
+        else if(!mViewModel.isDarkMode()){
+            view.setBackgroundColor(getResources().getColor(R.color.rpg_white));
+            name.setTextColor(getResources().getColor(R.color.darkmode));
+            race.setTextColor(getResources().getColor(R.color.darkmode));
+            levelView.setTextColor(getResources().getColor(R.color.darkmode));
+            strengthView.setTextColor(getResources().getColor(R.color.darkmode));
+            intelView.setTextColor(getResources().getColor(R.color.darkmode));
+            charismaView.setTextColor(getResources().getColor(R.color.darkmode));
+            vitalityView.setTextColor(getResources().getColor(R.color.darkmode));
+            luckView.setTextColor(getResources().getColor(R.color.darkmode));
+            level.setTextColor(getResources().getColor(R.color.darkmode));
+            strength.setTextColor(getResources().getColor(R.color.darkmode));
+            intel.setTextColor(getResources().getColor(R.color.darkmode));
+            charisma.setTextColor(getResources().getColor(R.color.darkmode));
+            vitality.setTextColor(getResources().getColor(R.color.darkmode));
+            luck.setTextColor(getResources().getColor(R.color.darkmode));
+            perkLabel.setTextColor(getResources().getColor(R.color.darkmode));
+            modifiersLabel.setTextColor(getResources().getColor(R.color.darkmode));
+            perkView.setTextColor(getResources().getColor(R.color.darkmode));
+            modifiersView.setTextColor(getResources().getColor(R.color.darkmode));
+        }
 
         return view;
     }
