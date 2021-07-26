@@ -35,33 +35,11 @@
                     android:height="40sp"
                     android:gravity="left"
                     android:padding="10sp"
-                    android:text="Name"
+                    android:text="Name Race Level"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:typeface="monospace" />
 
-                <TextView
-                    android:id="@+id/charRace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:height="40sp"
-                    android:gravity="left"
-                    android:padding="10sp"
-                    android:text="Race"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:typeface="monospace" />
-
-                <TextView
-                    android:id="@+id/charLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:height="40sp"
-                    android:padding="10sp"
-                    android:text="Level"
-                    android:textColor="#000000" />
             </TableRow>
 
             <TableRow
