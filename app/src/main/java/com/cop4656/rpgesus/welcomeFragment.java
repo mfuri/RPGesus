@@ -61,6 +61,20 @@ public class welcomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mViewModel.setDarkMode(dataSnapshot.getValue(Boolean.class));
+                if(mViewModel.isDarkMode())
+                {
+                    darkMode.setValue(true);
+                    switchDarkMode.setChecked(true);
+                    view.setBackgroundColor(getResources().getColor(R.color.darkmode));
+                    switchDarkMode.setTextColor(getResources().getColor(R.color.rpg_white));
+                }
+                else if (!mViewModel.isDarkMode())
+                {
+                    darkMode.setValue(false);
+                    switchDarkMode.setChecked(false);
+                    view.setBackgroundColor(getResources().getColor(R.color.rpg_white));
+                    switchDarkMode.setTextColor(getResources().getColor(R.color.darkmode));
+                }
             }
 
             @Override
@@ -71,18 +85,18 @@ public class welcomeFragment extends Fragment {
 
         darkMode.addListenerForSingleValueEvent(valueEventListener);
 
+
+
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(switchDarkMode.isChecked()){
-                    darkMode.setValue(true);
                     mViewModel.setDarkMode(true);
                     view.setBackgroundColor(getResources().getColor(R.color.darkmode));
                     switchDarkMode.setTextColor(getResources().getColor(R.color.rpg_white));
                 }
                 else if (!switchDarkMode.isChecked())
                 {
-                    darkMode.setValue(false);
                     mViewModel.setDarkMode(false);
                     view.setBackgroundColor(getResources().getColor(R.color.rpg_white));
                     switchDarkMode.setTextColor(getResources().getColor(R.color.darkmode));
