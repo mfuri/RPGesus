@@ -44,8 +44,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
+
 
 /**
  * A simple {@link Fragment} subclass.

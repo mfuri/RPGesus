@@ -100,6 +100,8 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
     private Spinner Race;
     private TextView setRace;
 
+    private Character character;
+
     public static final int IMAGE_CODE = 1;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -151,6 +153,7 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
 
         mViewModel =  new ViewModelProvider(requireActivity()).get(com.cop4656.rpgesus.CharacterViewModel.class);
         level = mViewModel.getCurrentCharacter().getValue().getLevel();
+        character = mViewModel.getCurrentCharacter().getValue();
         //Getting all buttons
 
         strengthPlus = (Button) view.findViewById(R.id.strengthPlusButton);
@@ -203,6 +206,30 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         charisma.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getCharisma())));
         vitality.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getVitality())));
         luck.setText(String.valueOf(AddPoint(mViewModel.getCurrentCharacter().getValue().getLuck())));
+
+        TextView levelLabel = view.findViewById(R.id.EditLevelLabel);
+        TextView levelView = view.findViewById(R.id.editLevel);
+
+        levelView.setText(String.valueOf(level));
+
+        Button levelUpButton = (Button) view.findViewById(R.id.levelUpButton);
+
+        levelUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(level != 30){
+                    Toast.makeText(getContext(), "Congrats! You have now leveled up.", Toast.LENGTH_LONG).show();
+                    level++;
+                    character.setLevel(level);
+                    levelView.setText(String.valueOf(level));
+                    currentUnallocatedPoints++;
+                    points.setText(String.valueOf(currentUnallocatedPoints));
+                }
+                else{
+                    Toast.makeText(getContext(), "You are already max level. You can not level up further", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
 
@@ -260,7 +287,9 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
         Name.setText(mViewModel.getCurrentCharacter().getValue().getName());
         Race.setSelection(getIndex(Race, mViewModel.getCurrentCharacter().getValue().getRace()));
 
-        avatarView.setImageBitmap(StringToBitMap(mViewModel.getCurrentCharacter().getValue().getAvatar()));
+        bitmap = StringToBitMap(mViewModel.getCurrentCharacter().getValue().getAvatar());
+
+        avatarView.setImageBitmap(bitmap);
 
         List<String> races = Arrays.asList(getResources().getStringArray(R.array.races));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, races);
@@ -289,6 +318,8 @@ public class CharacterEditFragment extends Fragment implements View.OnClickListe
             intel.setBackgroundTintList(getResources().getColorStateList(R.color.rpg_white));
             pointsLabel.setTextColor(getResources().getColorStateList(R.color.rpg_white));
             points.setTextColor(getResources().getColorStateList(R.color.rpg_white));
+            levelLabel.setTextColor(getResources().getColorStateList(R.color.rpg_white));
+            levelView.setTextColor(getResources().getColorStateList(R.color.rpg_white));
         }
         if (!mViewModel.isDarkMode())
         {

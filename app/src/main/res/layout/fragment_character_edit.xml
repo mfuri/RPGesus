@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CharacterCreationFragment">
@@ -13,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -52,29 +53,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp"
-                    android:layout_marginTop="119dp"
+                    android:layout_marginTop="19dp"
                     android:layout_marginEnd="157dp"
                     android:gravity="center"
                     android:text="Total Skill Points:"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/levelUpButton" />
 
                 <TextView
                     android:id="@+id/remainingSkillPointsView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="101dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="28dp"
                     android:layout_marginEnd="101dp"
                     android:ems="10"
                     android:gravity="center"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.487"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pointsLabel" />
 
@@ -193,18 +194,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vitalityPointsEditText" />
 
-                <Spinner
-                    android:id="@+id/raceSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="64dp"
-                    android:entries="@array/races"
-                    android:spinnerMode="dialog"
-                    android:background="@android:drawable/btn_dropdown"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
-
                 <Button
                     android:id="@+id/strengthMinusButton"
                     android:layout_width="40dp"
@@ -319,9 +308,22 @@
                     android:id="@+id/setRaceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
                     android:text="Set Race:"
                     app:layout_constraintEnd_toStartOf="@+id/raceSpinner"
+                    app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
+
+                <Spinner
+                    android:id="@+id/raceSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="84dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/races"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/characterNameEditText" />
 
                 <Button
@@ -330,8 +332,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="68dp"
-                    android:text="Continue"
                     android:backgroundTint="@color/rpg_blue"
+                    android:text="Continue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/luckMinusButton" />
 
@@ -341,8 +343,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="68dp"
                     android:layout_marginTop="32dp"
-                    android:text="Go Back"
                     android:backgroundTint="@color/rpg_blue"
+                    android:text="Go Back"
                     app:layout_constraintEnd_toStartOf="@+id/continueButton"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -354,14 +356,42 @@
                     android:layout_height="59dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="21dp"
                     android:backgroundTint="@color/rpg_blue"
                     android:text="Upload Avatar"
-                    app:layout_constraintBottom_toTopOf="@+id/remainingSkillPointsView"
-                    app:layout_constraintEnd_toStartOf="@+id/pointsLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/characterAvatarView" />
+
+                <TextView
+                    android:id="@+id/EditLevelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="132dp"
+                    android:text="Level:"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toEndOf="@+id/avatarUploadButton"
+                    app:layout_constraintTop_toBottomOf="@+id/setRaceTextView" />
+
+                <Button
+                    android:id="@+id/levelUpButton"
+                    android:layout_width="47dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="104dp"
+                    android:layout_marginEnd="116dp"
+                    android:text="+"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/raceSpinner" />
+
+                <TextView
+                    android:id="@+id/editLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="132dp"
+                    android:text="30"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toEndOf="@+id/EditLevelLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/setRaceTextView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
