@@ -67,8 +67,8 @@
                     android:id="@+id/charSheetLevelView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="128dp"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginStart="116dp"
+                    android:layout_marginTop="79dp"
                     android:layout_weight="1"
                     android:text="Level:"
                     android:textAlignment="center"
@@ -76,22 +76,9 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:typeface="monospace"
-                    app:layout_constraintBottom_toTopOf="@+id/charSheetStrengthView"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetName" />
 
-                <TextView
-                    android:id="@+id/charSheetLevel"
-                    android:layout_width="43dp"
-                    android:layout_height="36dp"
-                    android:layout_marginTop="71dp"
-                    android:layout_weight="1"
-                    android:text="50"
-                    android:textAlignment="center"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:typeface="monospace"
-                    app:layout_constraintStart_toEndOf="@+id/charSheetLevelView"
-                    app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
                 <!--
                 <Button
                     android:id="@+id/levelUpButton"
@@ -107,6 +94,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
                 -->
+
+                <TextView
+                    android:id="@+id/charSheetLevel"
+                    android:layout_width="43dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_weight="1"
+                    android:text="50"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintStart_toEndOf="@+id/charSheetLevelView"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
+
                 <TextView
                     android:id="@+id/charSheetStrengthView"
                     android:layout_width="wrap_content"
@@ -227,32 +230,12 @@
                     app:layout_constraintStart_toEndOf="@+id/charSheetLuckView"
                     app:layout_constraintTop_toBottomOf="@+id/charSheetVitality" />
 
-                <Button
-                    android:id="@+id/charSheetHomeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="156dp"
-                    android:layout_marginTop="178dp"
-                    android:text="Home"
-                    app:layout_constraintStart_toEndOf="@+id/viewPerksButton"
-                    app:layout_constraintTop_toBottomOf="@+id/currentModifiersLabel" />
-
-                <Button
-                    android:id="@+id/viewPerksButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="178dp"
-                    android:text="Perks"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currentPerksLabel" />
-
                 <TextView
                     android:id="@+id/currentPerksView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="508dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="476dp"
                     android:text="Test"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -299,12 +282,31 @@
                     android:id="@+id/exportButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="178dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
                     android:text="Export"
-                    app:layout_constraintEnd_toStartOf="@+id/charSheetHomeButton"
-                    app:layout_constraintHorizontal_bias="0.532"
-                    app:layout_constraintStart_toEndOf="@+id/viewPerksButton"
-                    app:layout_constraintTop_toBottomOf="@+id/currentPerksLabel" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPerksButton" />
+
+                <Button
+                    android:id="@+id/charSheetHomeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Home"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/exportButton" />
+
+                <Button
+                    android:id="@+id/viewPerksButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Perks"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/charSheetRace" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
