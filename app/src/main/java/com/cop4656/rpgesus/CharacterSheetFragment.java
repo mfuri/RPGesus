@@ -198,6 +198,7 @@ public class CharacterSheetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createPDF(v);
+                Toast.makeText(getActivity(), "Saved pdf", Toast.LENGTH_SHORT).show();
             }
         });
 
