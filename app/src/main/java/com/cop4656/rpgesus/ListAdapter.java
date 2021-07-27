@@ -48,20 +48,12 @@ public class ListAdapter extends ArrayAdapter<Character> {
 
         if (p != null) {
             TextView charName = (TextView) v.findViewById(R.id.charName);
-            //TextView charLevel = (TextView) v.findViewById(R.id.charLevel);
-            //TextView charRace = (TextView) v.findViewById(R.id.charRace);
             TextView charSkills = (TextView) v.findViewById(R.id.charSkills);
             ImageView avatar = (ImageView) v.findViewById(R.id.charAvatar);
 
             if (charName != null) {
                 charName.setText(p.getName().trim() + " " + p.getRace().trim() + " " + String.valueOf(p.getLevel()).trim());
             }
-            /*if (charRace != null) {
-                charRace.setText(p.getRace().trim());
-            }
-            if (charLevel != null) {
-                charLevel.setText(String.valueOf(p.getLevel()).trim());
-            }*/
             if (charSkills != null){
                 charSkills.setText("S:" + p.getStrength() + " C:" + p.getCharisma() + " I:" + p.getIntelligence() + " L:" + p.getLuck() + " V:" + p.getVitality());
             }
@@ -72,16 +64,12 @@ public class ListAdapter extends ArrayAdapter<Character> {
             if(darkMode)
             {
                 charName.setTextColor(Color.WHITE);
-                //charLevel.setTextColor(Color.WHITE);
                 charSkills.setTextColor(Color.WHITE);
-                //charRace.setTextColor(Color.WHITE);
             }
             else if (!darkMode)
             {
                 charName.setTextColor(Color.BLACK);
-                //charLevel.setTextColor(Color.BLACK);
                 charSkills.setTextColor(Color.BLACK);
-                //charRace.setTextColor(Color.BLACK);
             }
 
         }
