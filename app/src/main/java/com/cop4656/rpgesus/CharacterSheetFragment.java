@@ -319,12 +319,6 @@ public class CharacterSheetFragment extends Fragment {
         exportbmp = Bitmap.createBitmap(screenView.getDrawingCache());
         screenView.setDrawingCacheEnabled(false);
 
-        /*LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-        FrameLayout root = (FrameLayout) inflater.inflate(R.layout.fragment_character_sheet, null);
-        root.setDrawingCacheEnabled(true);
-        exportbmp = getBitmapFromView(getActivity().getWindow().findViewById(R.id.sheetFrameLayout));*/
-
         File file = new File(dir, mViewModel.getCurrentCharacter().getValue().getName() +
                 "_CharacterSheet.pdf");
 
@@ -344,29 +338,10 @@ public class CharacterSheetFragment extends Fragment {
             addImage(doc, byteArray);
             doc.close();
         } catch (Exception e) {
+            Toast.makeText(getActivity(), "could not save pdf", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
-
-    /*public static Bitmap getBitmapFromView(View view) {
-        //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
-        //Bind a canvas to it
-        Canvas canvas = new Canvas(returnedBitmap);
-        canvas.scale(752, 1120);
-        //Get the view's background
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null)
-            //has background drawable, then draw it on the canvas
-            bgDrawable.draw(canvas);
-        else
-            //does not have background drawable, then draw white background on the canvas
-            canvas.drawColor(Color.WHITE);
-        // draw the view on the canvas
-        view.draw(canvas);
-        //return the bitmap
-        return returnedBitmap;
-    }*/
 
     private void addImage(Document doc, byte[] byteArray) {
         Image image = null;
